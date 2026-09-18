@@ -1,132 +1,133 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chương trình quay số Rung Chuông Vàng</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8"> <!-- Khai báo bảng mã ký tự tiếng Việt UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Đảm bảo giao diện tương thích responsive trên mọi thiết bị -->
+    <title>Chương trình quay số Rung Chuông Vàng</title> <!-- Tiêu đề hiển thị trên tab trình duyệt -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Tải font chữ Poppins từ Google Fonts -->
     <style>
+        /* Thiết lập chung cho toàn bộ trang */
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box; /* Tính toán kích thước bao gồm padding và border */
+            margin: 0; /* Xóa lề ngoài mặc định */
+            padding: 0; /* Xóa khoảng đệm trong mặc định */
+            font-family: 'Poppins', sans-serif; /* Áp dụng font chữ Poppins */
         }
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Nền chuyển sắc gradient hiện đại */
+            min-height: 100vh; /* Chiều cao tối thiểu phủ kín màn hình */
+            display: flex; /* Sử dụng mô hình Flexbox */
+            flex-direction: column; /* Sắp xếp theo chiều dọc */
+            align-items: center; /* Căn giữa theo chiều ngang */
+            justify-content: center; /* Căn giữa theo chiều dọc */
+            padding: 20px; /* Khoảng đệm bao quanh body */
+            color: #333; /* Màu chữ mặc định */
         }
         .container {
-            background: #ffffff;
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 650px;
-            width: 100%;
+            background: #ffffff; /* Nền trắng cho hộp chứa nội dung chính */
+            padding: 65px 70px; /* Khoảng đệm bên trong hộp chính */
+            border-radius: 30px; /* Bo tròn góc hộp */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); /* Hiệu ứng đổ bóng mờ sang trọng */
+            text-align: center; /* Căn giữa toàn bộ chữ */
+            max-width: 950px; /* Chiều rộng tối đa */
+            width: 100%; /* Co giãn linh hoạt theo màn hình */
         }
         .logos-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            display: flex; /* Sắp xếp các logo theo hàng ngang */
+            justify-content: center; /* Căn giữa logo theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            gap: 15px; /* Khoảng cách giữa các ô logo */
+            margin-bottom: 25px; /* Khoảng cách lề dưới */
         }
         .logo-box {
-            width: 75px;
-            height: 75px;
-            border: none;
-            border-radius: 12px;
-            display: flex;
+            width: 75px; /* Chiều rộng ô chứa logo */
+            height: 75px; /* Chiều cao ô chứa logo */
+            border: none; /* Không viền */
+            border-radius: 12px; /* Bo tròn góc khung logo */
+            display: flex; /* Căn giữa hình ảnh bên trong */
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            background: #ffffff;
+            overflow: hidden; /* Ẩn phần hình ảnh bị tràn ra ngoài */
+            background: #ffffff; /* Nền trắng */
             position: relative;
         }
         .logo-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            max-width: 100%; /* Giới hạn chiều rộng ảnh */
+            max-height: 100%; /* Giới hạn chiều cao ảnh */
+            object-fit: contain; /* Giữ tỉ lệ chuẩn khung hình */
         }
         .logo-box img[src="logo3.jpg"] {
             background: #ffffff;
             padding: 8px;
             object-fit: contain;
-            transform: scale(1.32);
+            transform: scale(1.32); /* Phóng to logo thứ 3 cho cân đối */
         }
         h1 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 24px;
+            color: #2c3e50; /* Màu xanh đậm cho tiêu đề chính */
+            margin-bottom: 8px; /* Khoảng cách phía dưới tiêu đề */
+            font-size: 24px; /* Kích thước chữ tiêu đề chính (có thể thay đổi tùy ý) */
         }
         p.subtitle {
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            font-size: 13px;
+            color: #7f8c8d; /* Màu xám cho phụ đề */
+            margin-bottom: 25px; /* Khoảng cách lề dưới */
+            font-size: 16px; /* Kích thước chữ phụ đề */
         }
         .display-box {
-            background: #f8f9fa;
-            border: 3px dashed #3498db;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            min-height: 130px;
+            background: #f8f9fa; /* Nền xám nhạt khung hiển thị kết quả */
+            border: 3px dashed #3498db; /* Viền nét đứt xanh dương nổi bật */
+            border-radius: 15px; /* Bo tròn góc khung */
+            padding: 25px; /* Khoảng đệm bên trong */
+            margin-bottom: 25px; /* Khoảng cách lề dưới */
+            min-height: 130px; /* Chiều cao tối thiểu */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
         }
         .cell-label {
-            font-size: 14px;
-            color: #e74c3c;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-size: 14px; /* Kích thước chữ nhãn trạng thái */
+            color: #e74c3c; /* Màu đỏ nổi bật cho nhãn */
+            font-weight: 600; /* Độ đậm chữ */
+            text-transform: uppercase; /* Viết hoa toàn bộ chữ cái */
+            letter-spacing: 1px; /* Khoảng cách giãn chữ */
+            margin-bottom: 8px; /* Khoảng cách dưới nhãn */
         }
         .numbers-result {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c3e50;
-            letter-spacing: 1px;
+            font-size: 30px; /* Kích thước chữ số kết quả rất lớn */
+            font-weight: 700; /* Độ đậm chữ số tối đa */
+            color: #2c3e50; /* Màu xanh đậm cho kết quả */
+            letter-spacing: 1px; /* Giãn khoảng cách các ký tự số */
         }
         .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
+            display: flex; /* Sắp xếp các nút hàng ngang */
+            gap: 15px; /* Khoảng cách giữa các nút bấm */
+            justify-content: center; /* Căn giữa các nút */
             margin-top: 15px;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Tự động xuống dòng nếu màn hình hẹp */
         }
         .btn-spin {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); /* Nền nút quay màu đỏ */
+            color: white; /* Chữ trắng */
             border: none;
             padding: 12px 25px;
             font-size: 15px;
             font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            border-radius: 50px; /* Bo tròn dạng viên thuốc */
+            cursor: pointer; /* Con trỏ chuột hình bàn tay */
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); /* Đổ bóng màu đỏ mờ */
             transition: transform 0.1s;
         }
         .btn-spin:active {
-            transform: scale(0.95);
+            transform: scale(0.95); /* Hiệu ứng thu nhỏ khi nhấn nút */
         }
         .btn-spin:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
+            background: #bdc3c7; /* Đổi sang màu xám khi nút bị vô hiệu hóa */
+            cursor: not-allowed; /* Con trỏ cấm bấm */
             box-shadow: none;
         }
         .btn-history {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); /* Nền nút lịch sử màu xanh dương */
             color: white;
             border: none;
             padding: 12px 20px;
@@ -137,7 +138,7 @@
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
         .btn-reset {
-            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); /* Nền nút reset màu cam */
             color: white;
             border: none;
             padding: 12px 20px;
@@ -147,27 +148,25 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
         }
-
         .toast-banner {
-            background: #eef2f7;
-            border: 2px dashed #2ecc71;
-            padding: 12px 20px;
-            border-radius: 12px;
+            background: #eef2f7; /* Nền xám nhạt cho banner thông báo nhanh */
+            border: 2px dashed #2ecc71; /* Viền nét đứt xanh lá cây */
+            padding: 18px 25px;
+            border-radius: 15px;
             margin: 15px auto;
-            max-width: 500px;
-            animation: fadeInDown 0.3s ease-in-out;
-            display: none;
-            text-align: left;
+            width: 100%;
+            animation: fadeInDown 0.3s ease-in-out; /* Hiệu ứng trượt xuống */
+            display: none; /* Mặc định ẩn banner */
         }
         .toast-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Căn đều nội dung sang hai bên */
             align-items: center;
             color: #2c3e50;
-            font-size: 15px;
+            font-size: 23px;
         }
         .toast-content b {
-            color: #e74c3c;
+            color: #e74c3c; /* Tô màu đỏ cho số quan trọng trong banner */
         }
         .toast-close-btn {
             background: none;
@@ -182,18 +181,16 @@
         .toast-close-btn:hover {
             color: #e74c3c;
         }
-
-        /* Nhóm nút điều khiển góc phải trên (Toàn màn hình & Nhạc nền) */
         .top-controls {
-            position: fixed;
+            position: fixed; /* Cố định vị trí các nút phụ ở góc màn hình */
             top: 20px;
             right: 20px;
             display: flex;
             gap: 10px;
-            z-index: 1000;
+            z-index: 1000; /* Nằm lớp trên cùng */
         }
         .top-btn {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7); /* Nền đen mờ trong suốt */
             color: white;
             border: none;
             padding: 8px 14px;
@@ -205,50 +202,64 @@
         .top-btn:hover {
             background: rgba(0, 0, 0, 0.9);
         }
-
         .modal {
-            display: none;
+            display: none; /* Mặc định ẩn các bảng popup modal */
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.6); /* Lớp phủ nền tối mờ */
             align-items: center;
             justify-content: center;
         }
         .modal-content {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-            text-align: left;
+            background-color: #fff; /* Nền trắng cho hộp nội dung modal */
+            padding: 30px !important;
+            border-radius: 20px;
+            width: 90vw !important;
+            max-width: 650px !important;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            text-align: center;
         }
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+        }
+        .modal-header h2 {
+            font-size: 28px !important;
+            margin: 0;
+            color: #2c3e50;
         }
         .close-btn {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
             color: #7f8c8d;
         }
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+        #countdownDisplay {
+            font-size: 140px !important; /* Cỡ chữ số đồng hồ đếm ngược cực lớn */
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 30px 0;
+            letter-spacing: 5px;
+        }
         .history-item {
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #f1f2f6;
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
+            font-size: 15px;
+            text-align: left;
         }
         @keyframes fadeInDown {
             0% { opacity: 0; transform: translateY(-10px); }
@@ -258,85 +269,106 @@
 </head>
 <body>
 
-    <!-- Khối nút bấm ở góc phải phía trên màn hình -->
+    <!-- Khối nút bấm chức năng ở góc phải phía trên màn hình -->
     <div class="top-controls">
-        <button id="musicToggleBtn" onclick="toggleBgMusic()" class="top-btn" title="Bật/Tắt nhạc nền">
-            🔇
-        </button>
-        <button onclick="toggleFullScreen()" class="top-btn" title="Phóng to toàn màn hình">
-            ⛶ Toàn màn hình
-        </button>
+        <button onclick="openCountdownModal()" class="top-btn" title="Đồng hồ đếm ngược 5 phút">⏱️</button> <!-- Nút mở bảng đếm ngược -->
+        <button id="musicToggleBtn" onclick="toggleBgMusic()" class="top-btn" title="Bật/Tắt nhạc nền">🔇</button> <!-- Nút bật tắt nhạc nền -->
+        <button onclick="toggleFullScreen()" class="top-btn" title="Phóng to toàn màn hình">⛶</button> <!-- Nút phóng to toàn màn hình -->
     </div>
 
-    <!-- 2 Thẻ audio -->
-    <audio id="bgMusic" src="nhacnen.mp3" preload="auto" loop></audio>
-    <audio id="spinAudio" src="nhacquay.mp3" preload="auto" controls style="display:none;"></audio>
+    <!-- Các thẻ âm thanh (audio) dùng cho hiệu ứng -->
+    <audio id="bgMusic" src="nhacnen.mp3" preload="auto" loop></audio> <!-- Thẻ chứa file nhạc nền lặp lại -->
+    <audio id="spinAudio" src="nhacquay.mp3" preload="auto" style="display:none;"></audio> <!-- Thẻ chứa file âm thanh quay số -->
 
     <div class="container">
+        <!-- Khu vực hiển thị 3 logo đơn vị -->
         <div class="logos-container">
             <div class="logo-box">
-                <img src="logo1.jpg" alt="Logo 1" onerror="this.style.display='none'">
+                <img src="logo1.jpg" alt="Logo 1" onerror="this.style.display='none'"> <!-- Ô chứa logo đơn vị thứ nhất -->
             </div>
             <div class="logo-box">
-                <img src="logo2.jpg" alt="Logo 2" onerror="this.style.display='none'">
+                <img src="logo2.jpg" alt="Logo 2" onerror="this.style.display='none'"> <!-- Ô chứa logo đơn vị thứ hai -->
             </div>
             <div class="logo-box">
-                <img src="logo3.jpg" alt="Logo 3" onerror="this.style.display='none'">
+                <img src="logo3.jpg" alt="Logo 3" onerror="this.style.display='none'"> <!-- Ô chứa logo đơn vị thứ ba -->
             </div>
         </div>
 
-        <h1>Truy Tìm 15 Chiến Binh Rung Chuông Vàng</h1>
-        <p class="subtitle">Vòng quay định mệnh – Lộ diện 15 gương mặt may mắn nhất</p>
+        <h1>Truy Tìm 15 Chiến Binh Rung Chuông Vàng</h1> <!-- Tiêu đề chính lớn của chương trình -->
+        <p class="subtitle">Vòng quay định mệnh – Lộ diện 15 gương mặt may mắn nhất</p> <!-- Phụ đề mô tả chương trình -->
 
+        <!-- Banner thông báo kết quả quay nhanh -->
         <div id="toastMessage" class="toast-banner">
             <div class="toast-content">
-                <span>🎉 <b>Kết quả:</b> <span id="toastNumbers">00, 00, 00, 00, 00</span></span>
-                <button onclick="closeToast()" class="toast-close-btn">&times;</button>
+                <span>🎉 <b>Kết quả:</b> <span id="toastNumbers">00, 00, 00, 00, 00</span></span> <!-- Hiển thị chuỗi số trúng giải -->
+                <button onclick="closeToast()" class="toast-close-btn">&times;</button> <!-- Nút đóng banner thông báo nhanh -->
             </div>
         </div>
 
+        <!-- Khung chính hiển thị số hoặc trạng thái vòng quay -->
         <div class="display-box" id="displayBox">
-            <div class="cell-label" id="cellLabel">ready</div>
-            <div class="numbers-result" id="numberResult">Let's go!</div>
+            <div class="cell-label" id="cellLabel">ready</div> <!-- Nhãn trạng thái nhỏ (Ready, Đang quay...) -->
+            <div class="numbers-result" id="numberResult">Let's go!</div> <!-- Nội dung số lớn hiển thị trung tâm màn hình -->
         </div>
 
+        <!-- Nhóm các nút điều khiển chính -->
         <div class="button-group">
-            <button class="btn-spin" id="spinBtn" onclick="startSpinning()">Bắt đầu quay</button>
-            <button class="btn-history" onclick="openHistoryModal()">Xem Lịch Sử</button>
-            <button class="btn-reset" onclick="resetGame()">Làm mới (Reset)</button>
+            <button class="btn-spin" id="spinBtn" onclick="startSpinning()">Bắt đầu quay</button> <!-- Nút bắt đầu quay số -->
+            <button class="btn-history" onclick="openHistoryModal()">Xem Lịch Sử</button> <!-- Nút mở bảng lịch sử các lượt quay -->
+            <button class="btn-reset" onclick="resetGame()">Làm mới (Reset)</button> <!-- Nút khôi phục vòng quay từ đầu -->
         </div>
     </div>
 
+    <!-- Hộp thoại Modal Lịch sử các lượt quay -->
     <div class="modal" id="historyModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Lịch Sử Đã Quay</h2>
-                <button class="close-btn" onclick="closeHistoryModal()">&times;</button>
+                <h2>Lịch Sử Đã Quay</h2> <!-- Tiêu đề bảng lịch sử -->
+                <button class="close-btn" onclick="closeHistoryModal()">&times;</button> <!-- Nút đóng bảng lịch sử -->
             </div>
-            <div id="fullHistoryList">Chưa có lượt quay nào.</div>
+            <div id="fullHistoryList" style="max-height: 40vh; overflow-y: auto;">Chưa có lượt quay nào.</div> <!-- Danh sách lịch sử có thanh cuộn -->
+        </div>
+    </div>
+
+    <!-- Hộp thoại Modal Đồng hồ đếm ngược 5 phút -->
+    <div class="modal" id="countdownModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⏱️Thời gian đếm ngược còn:</h2> <!-- Tiêu đề bảng đếm ngược -->
+                <button class="close-btn" onclick="closeCountdownModal()">&times;</button> <!-- Nút đóng bảng đếm ngược -->
+            </div>
+            <div id="countdownDisplay">
+                05:00 <!-- Màn hình hiển thị số phút:giây đếm ngược -->
+            </div>
+            <div class="button-group" style="display: flex; justify-content: center; gap: 20px;">
+                <button class="top-btn" style="background: #2ecc71; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="startCountdown()">Bắt đầu</button> <!-- Nút bắt đầu đồng hồ -->
+                <button class="top-btn" style="background: #e67e22; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="pauseCountdown()">Tạm dừng</button> <!-- Nút tạm dừng đồng hồ -->
+                <button class="top-btn" style="background: #e74c3c; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="resetCountdown()">Đặt lại</button> <!-- Nút cài đặt lại thời gian ban đầu -->
+            </div>
         </div>
     </div>
 
     <script>
-        // Hàm Bật/Tắt nhạc nền thủ công qua nút bấm ở góc trên
+        // --- XỬ LÝ NHẠC NỀN ---
         function toggleBgMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            const musicBtn = document.getElementById('musicToggleBtn');
+            const bgMusic = document.getElementById('bgMusic'); // Lấy tham chiếu đến thẻ audio nhạc nền
+            const musicBtn = document.getElementById('musicToggleBtn'); // Lấy tham chiếu đến nút bấm bật/tắt nhạc
 
-            if (bgMusic.paused) {
-                bgMusic.volume = 0.4;
-                bgMusic.play().then(() => {
-                    musicBtn.innerText = "🔊";
+            if (bgMusic.paused) { // Kiểm tra nếu nhạc đang ở trạng thái dừng
+                bgMusic.volume = 0.4; // Đặt mức âm lượng phát ở mức vừa phải (40%)
+                bgMusic.play().then(() => { // Kích hoạt phát nhạc nền
+                    musicBtn.innerText = "🔊"; // Đổi biểu tượng thành loa đang bật
                 }).catch(e => {
-                    alert("Không thể phát file nhạc nền. Bạn hãy kiểm tra lại file 'nhacnen.mp3' có nằm chung thư mục không nhé!");
+                    alert("Không thể phát file nhạc nền. Bạn hãy kiểm tra lại file 'nhacnen.mp3' có nằm chung thư mục không nhé!"); // Báo lỗi nếu thiếu file
                 });
             } else {
-                bgMusic.pause();
-                musicBtn.innerText = "🔇";
+                bgMusic.pause(); // Dừng phát nhạc nền nếu đang chạy
+                musicBtn.innerText = "🔇"; // Đổi biểu tượng thành loa đang tắt
             }
         }
 
-        const originalCells = [
+        // --- DỮ LIỆU QUAY SỐ ---
+        const originalCells = [ // Mảng lưu trữ danh sách các nhóm số dự thi ban đầu
             "145, 12, 384, 95, 230", "67, 211, 342, 3, 188", "255, 48, 112, 399, 74", "18, 301, 133, 264, 89",
             "315, 150, 41, 222, 59", "102, 360, 27, 175, 288", "333, 8, 194, 120, 246", "77, 305, 161, 29, 370",
             "235, 114, 52, 348, 180", "15, 272, 390, 91, 205", "320, 64, 137, 250, 2", "190, 31, 280, 110, 354",
@@ -359,133 +391,272 @@
             "143, 377, 82, 201, 125", "309, 45, 231, 100, 363", "197, 329, 11, 289, 71", "385, 177, 63, 253, 157"
         ];
 
-        let cells = [...originalCells];
-        let fullHistory = [];
+        let cells = [...originalCells]; // Tạo bản sao dữ liệu dùng để quay (bị bớt dần sau mỗi lần trúng)
+        let fullHistory = []; // Mảng lưu trữ lịch sử các lượt quay thành công
 
+        // --- LOGIC QUAY SỐ ---
         function startSpinning() {
-            if (cells.length === 0) {
-                alert("Đã quay hết tất cả các nhóm! Vui lòng bấm nút 'Làm mới (Reset)'.");
+            const spinBtn = document.getElementById('spinBtn'); // Lấy nút bắt đầu quay
+            if (spinBtn.disabled) return; // Nếu đang quay thì không bấm tiếp
+
+            if (cells.length === 0) { // Kiểm tra nếu đã quay hết toàn bộ danh sách
+                alert("Đã quay hết tất cả các nhóm! Vui lòng bấm nút 'Làm mới (Reset)'."); // Cảnh báo khi hết dữ liệu
                 return;
             }
 
-            // Phát nhạc quay số
-            const sound = document.getElementById('spinAudio');
+            const sound = document.getElementById('spinAudio'); // Lấy thẻ audio hiệu ứng âm thanh quay số
             if (sound) {
-                sound.currentTime = 0; 
-                sound.play().catch(e => console.log("Lỗi phát nhạc quay:", e));
+                sound.currentTime = 0; // Đưa thời gian phát âm thanh về mốc bắt đầu (0s)
+                sound.play().catch(e => console.log("Lỗi phát nhạc quay:", e)); // Phát âm thanh quay
             }
 
-            const btn = document.getElementById('spinBtn');
-            const resultEl = document.getElementById('numberResult');
-            const labelEl = document.getElementById('cellLabel');
-            const boxEl = document.getElementById('displayBox');
+            const btn = document.getElementById('spinBtn'); // Lấy nút bấm "Bắt đầu quay"
+            const resultEl = document.getElementById('numberResult'); // Lấy ô hiển thị số kết quả lớn
+            const labelEl = document.getElementById('cellLabel'); // Lấy nhãn trạng thái trên ô kết quả
+            const boxEl = document.getElementById('displayBox'); // Lấy khung bao bọc ô kết quả
             
-            btn.disabled = true;
-            boxEl.style.borderColor = '#e74c3c';
+            btn.disabled = true; // Vô hiệu hóa nút quay để tránh bấm liên tục khi đang chạy
+            boxEl.style.borderColor = '#e74c3c'; // Đổi màu viền khung thành màu đỏ khi đang quay
             
-            let counter = 0;
-const totalSteps = 25;
-const totalDuration = 4000; // Cố định đúng 4 giây (4000ms)
-const startTime = Date.now(); // Ghi nhận thời điểm bắt đầu bấm nút
+            let counter = 0; // Biến đếm số bước nhảy trong hiệu ứng quay
+            const totalSteps = 25; // Tổng số lần thay đổi số ngẫu nhiên trước khi dừng hẳn
+            const totalDuration = 4000; // Tổng thời gian diễn ra một lượt quay (4000 mili-giây = 4 giây)
+            const startTime = Date.now(); // Ghi nhận thời điểm bắt đầu quay chính xác bằng mili-giây
 
-function shuffleInterval() {
-    const elapsed = Date.now() - startTime; // Tính thời gian thực tế đã trôi qua
+            function shuffleInterval() {
+                const elapsed = Date.now() - startTime; // Tính thời gian thực tế đã trôi qua kể từ khi bấm quay
 
-    if (elapsed < totalDuration) {
-        // Chưa đủ 4 giây thì tiếp tục chạy số ngẫu nhiên
-        const randomIndex = Math.floor(Math.random() * cells.length);
-        labelEl.innerText = "Đang quay lồng cầu...";
-        resultEl.innerText = cells[randomIndex];
+                if (elapsed < totalDuration) { // Kiểm tra nếu chưa hết thời gian quay (4 giây)
+                    const randomIndex = Math.floor(Math.random() * cells.length); // Lấy một vị trí chỉ số ngẫu nhiên từ mảng dữ liệu còn lại
+                    labelEl.innerText = "Đang quay..."; // Cập nhật nhãn trạng thái đang quay
+                    resultEl.innerText = cells[randomIndex]; // Hiển thị tạm thời số ngẫu nhiên lên màn hình
 
-        // Tự động tính khoảng nghỉ tiếp theo để đến mốc 4 giây là vừa hết bước
-        const remainingTime = totalDuration - elapsed;
-        const remainingSteps = totalSteps - counter;
-        let nextInterval = remainingSteps > 0 ? remainingTime / remainingSteps : 100;
+                    const remainingTime = totalDuration - elapsed; // Tính thời gian còn lại
+                    const remainingSteps = totalSteps - counter; // Tính số bước nhảy còn lại
+                    let nextInterval = remainingSteps > 0 ? remainingTime / remainingSteps : 100; // Tăng dần khoảng thời gian giữa các bước để tạo hiệu ứng chậm dần đều
 
-        counter++;
-        setTimeout(shuffleInterval, nextInterval);
-    } else {
-        // ĐÃ ĐÚNG 4 GIÂY -> Chốt kết quả ngay lập tức tại đây!
-        const finalIndex = Math.floor(Math.random() * cells.length);
-        const finalValue = cells[finalIndex];
-        cells.splice(finalIndex, 1);
+                    counter++; // Tăng biến đếm bước lên 1 đơn vị
+                    setTimeout(shuffleInterval, nextInterval); // Lên lịch chạy tiếp bước hiệu ứng tiếp theo
+                } else { // Khi đã hết thời gian quay (đến mốc dừng lại)
+                    const finalIndex = Math.floor(Math.random() * cells.length); // Chọn ngẫu nhiên phần tử kết quả cuối cùng
+                    const finalValue = cells[finalIndex]; // Lấy giá trị chuỗi số trúng giải
+                    cells.splice(finalIndex, 1); // Loại bỏ phần tử vừa trúng ra khỏi mảng để không bị quay lại ở các lượt sau
 
-        labelEl.innerText = "🎉 CHÚC MỪNG CÁC BẠN CÓ SỐ SAU:";
-        resultEl.innerText = finalValue;
-        boxEl.style.borderColor = '#2ecc71';
+                    labelEl.innerText = "🎉 CHÚC MỪNG CÁC BẠN CÓ SỐ SAU:"; // Cập nhật nhãn trạng thái chúc mừng
+                    resultEl.innerText = finalValue; // Hiển thị kết quả chính thức lên màn hình
+                    boxEl.style.borderColor = '#2ecc71'; // Đổi màu viền khung thành màu xanh lá cây báo hiệu thành công
 
-        if (sound) {
-            sound.pause();
-            sound.currentTime = 0;
+                    if (sound) {
+                        sound.pause(); // Dừng phát âm thanh hiệu ứng quay số
+                        sound.currentTime = 0; // Đưa âm thanh về mốc đầu
+                    }
+
+                    document.getElementById('toastNumbers').innerText = finalValue; // Đưa kết quả vào banner thông báo nhanh
+                    document.getElementById('toastMessage').style.display = 'block'; // Hiển thị banner thông báo nhanh lên màn hình
+
+                    const now = new Date().toLocaleTimeString(); // Lấy thời gian hệ thống hiện tại định dạng giờ:phút:giây
+                    fullHistory.unshift({ time: now, values: finalValue }); // Lưu thông tin lượt quay vào đầu mảng lịch sử
+                    btn.disabled = false; // Mở khóa lại nút "Bắt đầu quay" cho lượt tiếp theo
+                }
+            }
+
+            shuffleInterval(); // Kích hoạt chạy vòng lặp hiệu ứng quay số ngẫu nhiên
         }
 
-        document.getElementById('toastNumbers').innerText = finalValue;
-        document.getElementById('toastMessage').style.display = 'block';
-
-        const now = new Date().toLocaleTimeString();
-        fullHistory.unshift({ time: now, values: finalValue });
-        btn.disabled = false;
-    }
-}
-
-shuffleInterval();
-        }
-
+        // --- ĐÓNG BANNER THÔNG BÁO ---
         function closeToast() {
-            document.getElementById('toastMessage').style.display = 'none';
+            document.getElementById('toastMessage').style.display = 'none'; // Ẩn banner thông báo kết quả nhanh khi bấm nút đóng
         }
 
+        // --- BẬT/TẮT TOÀN MÀN HÌNH ---
         function toggleFullScreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Kiểm tra nếu trình duyệt chưa ở chế độ toàn màn hình
                 document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Lỗi khi mở toàn màn hình: ${err.message}`);
+                    alert(`Lỗi khi mở toàn màn hình: ${err.message}`); // Báo lỗi nếu không thể phóng to toàn màn hình
                 });
             } else {
                 if (document.exitFullscreen) {
-                    document.exitFullscreen();
+                    document.exitFullscreen(); // Thoát khỏi chế độ toàn màn hình nếu đang bật
                 }
             }
         }
 
+        // --- LÀM MỚI (RESET) TRÒ CHƠI ---
         function resetGame() {
-            if (confirm("Bạn có chắc chắn muốn làm mới lại danh sách từ đầu không?")) {
-                cells = [...originalCells];
-                fullHistory = [];
-                document.getElementById('toastMessage').style.display = 'none';
-                document.getElementById('cellLabel').innerText = "ready";
-                document.getElementById('numberResult').innerText = "Let's go!";
-                document.getElementById('displayBox').style.borderColor = '#3498db';
-                document.getElementById('spinBtn').disabled = false;
+            if (confirm("Bạn có chắc chắn muốn làm mới lại danh sách từ đầu không?")) { // Hộp thoại xác nhận trước khi reset
+                cells = [...originalCells]; // Khôi phục lại toàn bộ danh sách dữ liệu ban đầu
+                fullHistory = []; // Xóa sạch mảng lưu lịch sử quay
+                document.getElementById('toastMessage').style.display = 'none'; // Ẩn banner thông báo nhanh
+                document.getElementById('cellLabel').innerText = "ready"; // Đặt lại nhãn trạng thái ban đầu
+                document.getElementById('numberResult').innerText = "Let's go!"; // Đặt lại nội dung màn hình chính ban đầu
+                document.getElementById('displayBox').style.borderColor = '#3498db'; // Khôi phục màu viền xanh dương ban đầu
+                document.getElementById('spinBtn').disabled = false; // Kích hoạt lại nút quay
             }
         }
 
+        // --- QUẢN LÝ MODAL LỊCH SỬ ---
         function openHistoryModal() {
-            const modal = document.getElementById('historyModal');
-            const listContainer = document.getElementById('fullHistoryList');
+            const modal = document.getElementById('historyModal'); // Lấy tham chiếu đến khung modal lịch sử
+            const listContainer = document.getElementById('fullHistoryList'); // Lấy vùng chứa danh sách lịch sử bên trong modal
             
-            if (fullHistory.length === 0) {
-                listContainer.innerHTML = "Chưa có lượt quay nào được ghi nhận.";
+            if (fullHistory.length === 0) { // Kiểm tra nếu chưa có lượt quay nào được thực hiện
+                listContainer.innerHTML = "Chưa có lượt quay nào được ghi nhận."; // Hiển thị thông báo trống
             } else {
-                let html = "";
-                fullHistory.forEach((item, index) => {
+                let html = ""; // Khởi tạo biến chuỗi HTML chứa danh sách lịch sử
+                fullHistory.forEach((item, index) => { // Duyệt qua từng phần tử trong mảng lịch sử
                     html += `<div class="history-item">
-                        <span><strong>Lượt ${fullHistory.length - index}:</strong> [${item.values}]</span>
-                        <span style="color: #888; font-size: 11px;">${item.time}</span>
+                        <span><strong>Lượt ${fullHistory.length - index}:</strong> [${item.values}]</span> <!-- Hiển thị số thứ tự lượt quay và giá trị kết quả -->
+                        <span style="color: #888; font-size: 12px;">${item.time}</span> <!-- Hiển thị thời gian thực hiện lượt quay -->
                     </div>`;
                 });
-                listContainer.innerHTML = html;
+                listContainer.innerHTML = html; // Đưa toàn bộ danh sách HTML vào trong modal lịch sử
             }
-            modal.style.display = "flex";
+            modal.style.display = "flex"; // Hiển thị modal lịch sử lên màn hình bằng kiểu flex
         }
 
         function closeHistoryModal() {
-            document.getElementById('historyModal').style.display = "none";
+            document.getElementById('historyModal').style.display = "none"; // Ẩn modal lịch sử đi
         }
 
+        // --- QUẢN LÝ ĐỒNG HỒ ĐẾM NGƯỢC 5 PHÚT ---
+        let countdownInterval; // Biến lưu trữ đối tượng khoảng thời gian đếm ngược (setInterval)
+        let timeLeft = 300; // Đặt thời gian đếm ngược mặc định là 300 giây (tương đương 5 phút)
+
+        function openCountdownModal() {
+            document.getElementById('countdownModal').style.display = "flex"; // Hiển thị modal đồng hồ đếm ngược lên màn hình
+        }
+
+        function closeCountdownModal() {
+            document.getElementById('countdownModal').style.display = "none"; // Ẩn modal đồng hồ đếm ngược
+            pauseCountdown(); // Tự động tạm dừng đồng hồ khi đóng bảng
+        }
+
+        function updateCountdownDisplay() {
+            const minutes = Math.floor(timeLeft / 60); // Tính số phút còn lại
+            const seconds = timeLeft % 60; // Tính số giây lẻ còn lại
+            document.getElementById('countdownDisplay').innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; // Cập nhật hiển thị định dạng mm:ss
+        }
+
+        function startCountdown() {
+            if (countdownInterval) return; // Nếu đồng hồ đang chạy thì không làm gì thêm
+            if (timeLeft <= 0) timeLeft = 300; // Nếu hết giờ thì reset lại mốc 5 phút
+            
+            countdownInterval = setInterval(() => { // Thiết lập vòng lặp trừ thời gian mỗi 1 giây
+                if (timeLeft > 0) {
+                    timeLeft--; // Giảm 1 giây
+                    updateCountdownDisplay(); // Cập nhật lại giao diện đồng hồ
+                } else {
+                    clearInterval(countdownInterval); // Dừng bộ đếm khi về 0
+                    countdownInterval = null;
+                    alert("⏰ Hết giờ!"); // Báo hiệu hết giờ
+                }
+            }, 1000);
+        }
+
+        function pauseCountdown() {
+            clearInterval(countdownInterval); // Xóa khoảng thời gian đếm ngược để tạm dừng
+            countdownInterval = null;
+        }
+
+        function resetCountdown() {
+            clearInterval(countdownInterval); // Dừng bộ đếm hiện tại
+            countdownInterval = null;
+            timeLeft = 300; // Đặt lại thời gian về 5 phút (300 giây)
+            updateCountdownDisplay(); // Cập nhật lại giao diện hiển thị
+        }
+
+        // --- XỬ LÝ PHÍM TẮT BÀN PHÍM ---
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('countdownModal'); // Lấy modal đếm ngược
+            const historyModal = document.getElementById('historyModal'); // Lấy modal lịch sử
+            
+            // 1. Nhấn phím F để Bật/Tắt chế độ toàn màn hình
+            if (event.code === "KeyF" || event.key === "f" || event.key === "F") {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => console.log(err));
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+                return;
+            }
+
+            // 2. Nhấn phím T để Mở/Đóng bảng đếm ngược
+            if (event.code === "KeyT" || event.key === "t" || event.key === "T") {
+                event.preventDefault();
+                if (modal.style.display === "flex") {
+                    closeCountdownModal();
+                } else {
+                    openCountdownModal();
+                }
+                return;
+            }
+
+            // 3. Nhấn phím H để Mở/Đóng bảng Lịch sử
+            if (event.code === "KeyH" || event.key === "h" || event.key === "H") {
+                event.preventDefault();
+                if (historyModal.style.display === "flex") {
+                    closeHistoryModal();
+                } else {
+                    openHistoryModal();
+                }
+                return;
+            }
+
+            // 4. Nhấn phím L để Làm mới (Reset) game
+            if (event.code === "KeyL" || event.key === "l" || event.key === "L") {
+                event.preventDefault();
+                resetGame();
+                return;
+            }
+
+            // 5. Nhấn phím Backspace hoặc X để đóng nhanh các hộp thoại popup đang mở
+            if (event.code === "Backspace" || event.code === "KeyX" || event.key === "x" || event.key === "X") {
+                if (modal && modal.style.display === "flex") {
+                    event.preventDefault();
+                    closeCountdownModal();
+                }
+                if (historyModal && historyModal.style.display === "flex") {
+                    event.preventDefault();
+                    closeHistoryModal();
+                }
+                return;
+            }
+
+            // 6. Xử lý riêng trong bảng đếm ngược (Space/Enter để Bắt đầu/Tạm dừng, R để Đặt lại)
+            if (modal && modal.style.display === "flex") {
+                if (event.code === "Space" || event.code === "Enter") {
+                    event.preventDefault();
+                    if (countdownInterval) {
+                        pauseCountdown();
+                    } else {
+                        startCountdown();
+                    }
+                } else if (event.code === "KeyR" || event.key === "r" || event.key === "R") {
+                    resetCountdown();
+                }
+                return;
+            }
+
+            // 7. Ở màn hình chính: Nhấn Space hoặc Enter để Bắt đầu quay số
+            if (event.code === "Space" || event.code === "Enter") {
+                event.preventDefault();
+                startSpinning();
+            }
+        });
+
+        // Click vào vùng nền tối mờ bên ngoài để tự động đóng popup
         window.onclick = function(event) {
-            const modal = document.getElementById('historyModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            const historyModal = document.getElementById('historyModal');
+            const countdownModal = document.getElementById('countdownModal');
+            if (event.target == historyModal) {
+                historyModal.style.display = "none";
+            }
+            if (event.target == countdownModal) {
+                countdownModal.style.display = "none";
+                pauseCountdown();
             }
         }
     </script>
