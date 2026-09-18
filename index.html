@@ -218,10 +218,39 @@
             background-color: #fff; /* Nền trắng cho hộp nội dung modal */
             padding: 30px !important;
             border-radius: 20px;
-            width: 90vw !important;
-            max-width: 650px !important;
+            width: 90vw !important; /* Mở rộng chiều rộng modal để chứa cả đồng hồ và QR */
+            max-width: 1200px !important; /* Kích thước tối đa rộng hơn để hiển thị đẹp mắt */
             box-shadow: 0 15px 50px rgba(0,0,0,0.4);
             text-align: center;
+        }
+        /* CSS chia bố cục bên trong modal đếm ngược: Trái là đồng hồ, Phải là QR Code lớn */
+        .countdown-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .countdown-left-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .countdown-right-side {
+            flex: 1; /* Chiếm diện tích lớn bên phải (tương đương gần một nửa màn hình) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 2px dashed #eee; /* Đường kẻ phân cách nhẹ */
+            padding-left: 20px;
+        }
+        .modal-qr-image {
+            width: 100%;
+            max-width: 500px; /* Kích thước QR Code to rõ */
+            height: auto;
+            object-fit: contain;
         }
         .modal-header {
             display: flex;
@@ -247,10 +276,10 @@
             color: #e74c3c;
         }
         #countdownDisplay {
-            font-size: 140px !important; /* Cỡ chữ số đồng hồ đếm ngược cực lớn */
+            font-size: 110px !important; /* Cỡ chữ số đồng hồ đếm ngược lớn */
             font-weight: bold;
             color: #e74c3c;
-            margin: 30px 0;
+            margin: 20px 0;
             letter-spacing: 5px;
         }
         .history-item {
@@ -313,15 +342,15 @@
 
         <!-- Nhóm các nút điều khiển chính -->
         <div class="button-group">
-            <button class="btn-spin" id="spinBtn" onclick="startSpinning()">Bắt đầu quay</button> <!-- Nút bắt đầu quay số -->
-            <button class="btn-history" onclick="openHistoryModal()">Xem Lịch Sử</button> <!-- Nút mở bảng lịch sử các lượt quay -->
-            <button class="btn-reset" onclick="resetGame()">Làm mới (Reset)</button> <!-- Nút khôi phục vòng quay từ đầu -->
+            <button class="btn-spin" id="spinBtn" onclick="startSpinning()">Bắt đầu</button> <!-- Nút bắt đầu quay số -->
+            <button class="btn-history" onclick="openHistoryModal()">Lịch sử</button> <!-- Nút mở bảng lịch sử các lượt quay -->
+            <button class="btn-reset" onclick="resetGame()">Làm mới</button> <!-- Nút khôi phục vòng quay từ đầu -->
         </div>
     </div>
 
     <!-- Hộp thoại Modal Lịch sử các lượt quay -->
     <div class="modal" id="historyModal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 650px !important;">
             <div class="modal-header">
                 <h2>Lịch Sử Đã Quay</h2> <!-- Tiêu đề bảng lịch sử -->
                 <button class="close-btn" onclick="closeHistoryModal()">&times;</button> <!-- Nút đóng bảng lịch sử -->
@@ -330,25 +359,47 @@
         </div>
     </div>
 
-    <!-- Hộp thoại Modal Đồng hồ đếm ngược 5 phút -->
+    <!-- Hộp thoại Modal Đồng hồ đếm ngược 5 phút (Tích hợp QR Code lớn bên phải) -->
     <div class="modal" id="countdownModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>⏱️Thời gian đếm ngược còn:</h2> <!-- Tiêu đề bảng đếm ngược -->
                 <button class="close-btn" onclick="closeCountdownModal()">&times;</button> <!-- Nút đóng bảng đếm ngược -->
             </div>
-            <div id="countdownDisplay">
-                05:00 <!-- Màn hình hiển thị số phút:giây đếm ngược -->
-            </div>
-            <div class="button-group" style="display: flex; justify-content: center; gap: 20px;">
-                <button class="top-btn" style="background: #2ecc71; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="startCountdown()">Bắt đầu</button> <!-- Nút bắt đầu đồng hồ -->
-                <button class="top-btn" style="background: #e67e22; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="pauseCountdown()">Tạm dừng</button> <!-- Nút tạm dừng đồng hồ -->
-                <button class="top-btn" style="background: #e74c3c; font-size: 18px !important; padding: 12px 24px !important; border-radius: 12px; cursor: pointer;" onclick="resetCountdown()">Đặt lại</button> <!-- Nút cài đặt lại thời gian ban đầu -->
+            
+            <!-- Bố cục chia đôi: Trái là đồng hồ, Phải là QR Code -->
+            <div class="countdown-layout">
+                <div class="countdown-left-side">
+                    <div id="countdownDisplay">
+                        05:00 <!-- Màn hình hiển thị số phút:giây đếm ngược -->
+                    </div>
+                    <div class="button-group" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                        <button class="top-btn" style="background: #2ecc71; font-size: 16px !important; padding: 10px 20px !important; border-radius: 12px; cursor: pointer;" onclick="startCountdown()">Bắt đầu</button> <!-- Nút bắt đầu đồng hồ -->
+                        <button class="top-btn" style="background: #e67e22; font-size: 16px !important; padding: 10px 20px !important; border-radius: 12px; cursor: pointer;" onclick="pauseCountdown()">Tạm dừng</button> <!-- Nút tạm dừng đồng hồ -->
+                        <button class="top-btn" style="background: #e74c3c; font-size: 16px !important; padding: 10px 20px !important; border-radius: 12px; cursor: pointer;" onclick="resetCountdown()">Đặt lại</button> <!-- Nút cài đặt lại thời gian ban đầu -->
+                    </div>
+                </div>
+                
+                <div class="countdown-right-side">
+                    <!-- Thẻ hình ảnh QR Code tích hợp hàm kiểm tra if/else định dạng ảnh png/jpg -->
+                    <img id="qrImageElement" src="qrcode.jpg" alt="Mã QR Code" class="modal-qr-image" style="display: none;" onerror="handleQrError(this)">
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // --- HÀM XỬ LÝ IF/ELSE ĐỊNH DẠNG ẢNH QR (PNG HOẶC JPG) ---
+        function handleQrError(imgElement) {
+            // Kiểm tra nếu file hiện tại là qrcode.png bị lỗi/không tồn tại
+            if (imgElement.src.includes("qrcode.png")) {
+                imgElement.src = "qrcode.jpg"; // Chuyển sang thử tìm file qrcode.jpg
+            } else {
+                // Nếu cả png và jpg đều không tìm thấy thì hiển thị ảnh thông báo
+                imgElement.src = 'https://via.placeholder.com/400?text=Vui+long+them+file+qrcode.png+hoac+jpg'; 
+            }
+        }
+
         // --- XỬ LÝ NHẠC NỀN ---
         function toggleBgMusic() {
             const bgMusic = document.getElementById('bgMusic'); // Lấy tham chiếu đến thẻ audio nhạc nền
@@ -519,52 +570,62 @@
         }
 
         // --- QUẢN LÝ ĐỒNG HỒ ĐẾM NGƯỢC 5 PHÚT ---
-        let countdownInterval; // Biến lưu trữ đối tượng khoảng thời gian đếm ngược (setInterval)
-        let timeLeft = 300; // Đặt thời gian đếm ngược mặc định là 300 giây (tương đương 5 phút)
+        // --- QUẢN LÝ ĐỒNG HỒ ĐẾM NGƯỢC 5 PHÚT ---
+let countdownInterval; 
+let timeLeft = 300; 
 
-        function openCountdownModal() {
-            document.getElementById('countdownModal').style.display = "flex"; // Hiển thị modal đồng hồ đếm ngược lên màn hình
-        }
+function openCountdownModal() {
+    document.getElementById('countdownModal').style.display = "flex"; 
+    // Mở bảng lên thì ẩn QR đi trước, chờ khi nào bấm Bắt đầu mới hiện
+    document.getElementById('qrImageElement').style.display = "none";
+}
 
-        function closeCountdownModal() {
-            document.getElementById('countdownModal').style.display = "none"; // Ẩn modal đồng hồ đếm ngược
-            pauseCountdown(); // Tự động tạm dừng đồng hồ khi đóng bảng
-        }
+function closeCountdownModal() {
+    document.getElementById('countdownModal').style.display = "none"; 
+    pauseCountdown(); 
+}
 
-        function updateCountdownDisplay() {
-            const minutes = Math.floor(timeLeft / 60); // Tính số phút còn lại
-            const seconds = timeLeft % 60; // Tính số giây lẻ còn lại
-            document.getElementById('countdownDisplay').innerText = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; // Cập nhật hiển thị định dạng mm:ss
-        }
+function updateCountdownDisplay() {
+    const minutes = Math.floor(timeLeft / 60); 
+    const seconds = timeLeft % 60; 
+    document.getElementById('countdownDisplay').innerText = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; 
+}
 
-        function startCountdown() {
-            if (countdownInterval) return; // Nếu đồng hồ đang chạy thì không làm gì thêm
-            if (timeLeft <= 0) timeLeft = 300; // Nếu hết giờ thì reset lại mốc 5 phút
-            
-            countdownInterval = setInterval(() => { // Thiết lập vòng lặp trừ thời gian mỗi 1 giây
-                if (timeLeft > 0) {
-                    timeLeft--; // Giảm 1 giây
-                    updateCountdownDisplay(); // Cập nhật lại giao diện đồng hồ
-                } else {
-                    clearInterval(countdownInterval); // Dừng bộ đếm khi về 0
-                    countdownInterval = null;
-                    alert("⏰ Hết giờ!"); // Báo hiệu hết giờ
-                }
-            }, 1000);
-        }
+function startCountdown() {
+    if (countdownInterval) return; 
+    if (timeLeft <= 0) timeLeft = 300; 
+    
+    // --- KHI BẤM BẮT ĐẦU THÌ HIỆN QR CODE LÊN ---
+    document.getElementById('qrImageElement').style.display = "block";
 
-        function pauseCountdown() {
-            clearInterval(countdownInterval); // Xóa khoảng thời gian đếm ngược để tạm dừng
+    countdownInterval = setInterval(() => { 
+        if (timeLeft > 0) {
+            timeLeft--; 
+            updateCountdownDisplay(); 
+        } else {
+            clearInterval(countdownInterval); 
             countdownInterval = null;
+            alert("⏰ Hết giờ!"); 
         }
+    }, 1000);
+}
 
-        function resetCountdown() {
-            clearInterval(countdownInterval); // Dừng bộ đếm hiện tại
-            countdownInterval = null;
-            timeLeft = 300; // Đặt lại thời gian về 5 phút (300 giây)
-            updateCountdownDisplay(); // Cập nhật lại giao diện hiển thị
-        }
+function pauseCountdown() {
+    clearInterval(countdownInterval); 
+    countdownInterval = null;
+    // --- KHI TẠM DỪNG: KHÔNG ĐỤNG TỚI QR NÊN NÓ SẼ GIỮ NGUYÊN KHÔNG BỊ MẤT ---
+}
+
+function resetCountdown() {
+    clearInterval(countdownInterval); 
+    countdownInterval = null;
+    timeLeft = 300; 
+    updateCountdownDisplay(); 
+    
+    // --- KHI ĐẶT LẠI THÌ ẨN QR CODE ĐI ---
+    document.getElementById('qrImageElement').style.display = "none";
+}
 
         // --- XỬ LÝ PHÍM TẮT BÀN PHÍM ---
         document.addEventListener('keydown', function(event) {
@@ -650,7 +711,7 @@
         // Click vào vùng nền tối mờ bên ngoài để tự động đóng popup
         window.onclick = function(event) {
             const historyModal = document.getElementById('historyModal');
-            const countdownModal = document.getElementById('countdownModal');
+            const countdownModal = document.getElementByIffd('countdownModal');
             if (event.target == historyModal) {
                 historyModal.style.display = "none";
             }
